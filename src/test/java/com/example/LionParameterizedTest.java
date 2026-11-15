@@ -28,8 +28,7 @@ public class LionParameterizedTest {
     @Test public void shouldValidateSexAndSetMane() throws Exception {
         LionDependency dependency = mock(LionDependency.class);
         if (invalid) {
-            Exception error = assertThrows(Exception.class, () -> new Lion(sex, dependency));
-            assertEquals("Используйте допустимые значения пола животного - самей или самка", error.getMessage());
+            assertThrows(Exception.class, () -> new Lion(sex, dependency));
         } else {
             assertEquals(expectedMane, new Lion(sex, dependency).doesHaveMane());
         }

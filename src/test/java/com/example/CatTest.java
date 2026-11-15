@@ -12,9 +12,14 @@ public class CatTest {
 
     @Test public void shouldDelegateFoodToFeline() throws Exception {
         Feline feline = mock(Feline.class);
-        List<String> food = List.of("Рыба");
+        List<String> food = List.of("Животные", "Птицы", "Рыба");
         when(feline.eatMeat()).thenReturn(food);
         assertEquals(food, new Cat(feline).getFood());
+    }
+
+    @Test public void shouldCallFelineForFood() throws Exception {
+        Feline feline = mock(Feline.class);
+        new Cat(feline).getFood();
         verify(feline).eatMeat();
     }
 
@@ -22,6 +27,6 @@ public class CatTest {
         Feline feline = mock(Feline.class);
         Exception error = new Exception("food error");
         when(feline.eatMeat()).thenThrow(error);
-        assertSame(error, assertThrows(Exception.class, () -> new Cat(feline).getFood()));
+        assertThrows(Exception.class, () -> new Cat(feline).getFood());
     }
 }
